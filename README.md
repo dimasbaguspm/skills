@@ -1,6 +1,6 @@
 # skills
 
-General engineering workflow skills: plan, ticket, MR, review, commit. Portable across agent tools (Pi, OpenCode, Claude Code, Hermes, Codex).
+General engineering workflow skills: ticket, MR, review, commit. Portable across agent tools (Pi, OpenCode, Claude Code, Hermes, Codex).
 
 One source of truth. `git pull` updates every tool on every device.
 
@@ -37,7 +37,6 @@ Symlinks mean every tool sees the change immediately. No re-install.
 
 ```
 skills/
-  plan/SKILL.md
   ticket/SKILL.md
   mr/SKILL.md
   review-mr/SKILL.md

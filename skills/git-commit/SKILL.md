@@ -32,13 +32,41 @@ Follow Conventional Commits: short subject, no fluff, no long descriptions.
 
 Breaking change: add `!` after type/scope — `feat!:` — plus a `BREAKING CHANGE:` footer only if the reason is not obvious.
 
+## Scope
+
+Scope names the **area of the system**, not the file and not the type. It answers "which part does this touch?" so history can be filtered by component.
+
+- **One scope per commit.** If a change needs two, it is two commits. Split it.
+- **Lowest meaningful level.** `auth`, not `src` or `app`. Choose the module or package that owns the change.
+- **Reuse existing scopes.** Run `git log --oneline -50` and match the vocabulary already in use. Inventing a new scope per commit destroys the ability to filter.
+- **Omit when it adds nothing.** Repo-wide work (`ci`, `build`, `deps`), docs, and releases rarely need one. `fix: handle empty cart` beats `fix(checkout): handle empty cart` when checkout is the only thing you work on.
+- **Rename follows the new name.** When a module is renamed, use the new scope.
+- **Never a file path, a version, or a ticket number.** Tickets belong in the commit body or the MR, not the scope.
+
+| Scope | Covers |
+|---|---|
+| `auth` | authentication and authorization |
+| `checkout` | the checkout flow |
+| `api-client` | the API client package |
+| `db` | schema and migrations |
+| `deps`, `ci`, `build` | tooling; often better left unscoped |
+
+| Bad scope | Why |
+|---|---|
+| `src/auth/login.ts` | a file, not an area |
+| `app` | too broad to filter by |
+| `utils` | meaningless, touched by everything |
+| `feat` | the type is not a scope |
+| `PROJ-123` | a ticket, not an area |
+
 ## Workflow
 
 1. Run `git status` and `git diff` to see what changed.
 2. Pick the type that best matches the change.
-3. Write the subject: `<verb> <what>`, imperative, exact (`feat: add user login` not `feat: user login was added`).
-4. Stage only intended files: `git add <paths>`.
-5. Commit: `git commit -m "<message>"`.
+3. Choose a scope that matches existing history, or omit it.
+4. Write the subject: `<verb> <what>`, imperative, exact (`feat: add user login` not `feat: user login was added`).
+5. Stage only intended files: `git add <paths>`.
+6. Commit: `git commit -m "<message>"`.
 
 ## Examples
 
@@ -47,8 +75,9 @@ feat: add user login
 fix: handle empty cart checkout
 refactor: extract validation into helper
 feat(auth): add refresh token rotation
-perf: cache api responses
+perf(api-client): cache responses
 docs: update readme install steps
+ci: cache node_modules
 ```
 
 Bad — too long, too detailed:
@@ -66,6 +95,8 @@ fix: handle empty cart checkout
 - **Past tense:** `feat: added user login` → write imperative `feat: add user login`.
 - **Sentences in subject:** no periods, no connecting words (`and`, `then`, `because`).
 - **Over-scoping:** `fix(user-service-impl): ...` → `fix(user): ...`.
+- **File-path scope:** `fix(src/components/Button.tsx): ...` → omit the scope or name the area.
+- **Type as scope:** `fix(fix): ...` is not a scope.
 - **Repeating the diff:** a body listing changed files adds nothing. Cut it.
 - **`feat` for everything:** docs/test/style changes are not features.
 
