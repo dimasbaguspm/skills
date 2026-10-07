@@ -6,18 +6,30 @@ One source of truth. `git pull` updates every tool on every device.
 
 ## Install
 
+One line, no clone needed:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/dimasbaguspm/skills/main/install.sh | sh
+```
+
+Clones to `~/.local/share/skills` (override with `SKILLS_DIR=...`), then symlinks every skill into each tool's global skills directory. Safe to re-run.
+
+Or from a checkout:
+
 ```bash
 git clone https://github.com/dimasbaguspm/skills.git ~/developments/skills
 cd ~/developments/skills && ./install.sh
 ```
 
-`install.sh` symlinks every skill into the global skills directory of each tool it finds. Re-run it after adding or renaming a skill.
+Re-run `install.sh` after adding or renaming a skill. Editing an existing skill needs no re-run.
 
 ## Update
 
 ```bash
-cd ~/developments/skills && git pull
+curl -fsSL https://raw.githubusercontent.com/dimasbaguspm/skills/main/install.sh | sh
 ```
+
+This pulls the existing clone and re-links. From a checkout instead: `git -C ~/developments/skills pull`.
 
 Symlinks mean every tool sees the change immediately. No re-install.
 
@@ -40,11 +52,11 @@ Each skill is a directory with `SKILL.md`. The directory name must match the `na
 
 | Tool | Where |
 |---|---|
-| Pi | `~/.pi/agent/settings.json`: `"skills": ["~/developments/skills/skills"]` |
-| OpenCode | `~/.config/opencode/opencode.jsonc`: `"skills": { "paths": ["~/developments/skills/skills"] }` |
-| Hermes | `~/.hermes/config.yaml`: `skills.external_dirs: ["~/developments/skills/skills"]` |
-| Claude Code | `~/.claude/skills/` (symlink only) |
-| cross-tool | `~/.agents/skills/` (read by Pi, Hermes, Codex) |
+| Pi | `~/.pi/agent/settings.json`: `"skills": ["~/.local/share/skills/skills"]` |
+| OpenCode | `~/.config/opencode/opencode.jsonc`: `"skills": { "paths": ["~/.local/share/skills/skills"] }` |
+| Hermes | `~/.hermes/config.yaml`: `skills.external_dirs: ["~/.local/share/skills/skills"]` |
+| Claude Code | `~/.claude/skills/` (symlink only; no path setting) |
+| cross-tool | `~/.agents/skills/` (read by Pi, OpenCode, Hermes, Codex) |
 
 Pi can also install the repo as a git package: `pi install git:github.com/dimasbaguspm/skills`.
 
