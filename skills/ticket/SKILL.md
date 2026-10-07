@@ -48,12 +48,20 @@ Example: `[auth]: rotate refresh tokens on reuse`
 1. Gather context from the conversation, or fetch the referenced plan, spec, or issue.
 2. Draft tickets: title, blocked by, definition of done.
 3. Show the list to the user. Iterate until approved.
-4. Create in dependency order, so blockers get numbers first:
+4. Create in dependency order, so blockers get numbers first. Capture each number from the printed URL:
 
    ```bash
    gh issue create --title "<title>" --body-file <file>
    ```
 
-5. Link blockers in each ticket once the numbers exist.
+   Add `--label <label>` when the repo uses them (`gh label list`).
+5. Link blockers in each ticket once the numbers exist. Reference them as `Blocked by #<n>` in the body, or add the relationship in the issue's Relationships panel.
+6. Hand off to implementation: the created issue number is the `<TICKET>` the mr skill wants. Start a branch linked to the issue, then open the MR against it:
+
+   ```bash
+   gh issue develop <n> --checkout
+   ```
+
+   Open the MR with `[#<n>]` in the title and `Closes #<n>` in the body. GitHub links issue, branch, and PR, then closes the issue on merge.
 
 Do not close or modify the parent issue.
