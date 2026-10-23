@@ -22,19 +22,28 @@ Example: `[auth]: rotate refresh tokens on reuse`
 ## Body
 
 ```markdown
-## What's problem?
+## What problem does this solve?
 
-## What's affected and how?
+## What is the user facing?
 
-## Definition of Done
+## How will I solve it?
 
-## Additional Notes
+## Done when
+
+## Risks & notes
 ```
 
-- **What's problem?** The problem, from the user's point of view. Not the solution.
-- **What's affected and how?** The surfaces this touches and the behavior that changes.
-- **Definition of Done** is a checklist a reviewer can verify without reading the code.
-- **Additional Notes** for links, decisions, and follow-ups. Omit the section if empty.
+- **What problem does this solve?** The problem from the user's point of view, not the solution.
+- **What is the user facing?** The observable behavior: which surfaces change and what the user sees.
+- **How will I solve it?** The approach and the parts touched. A sketch, file tree or sequence diagram beats prose when structure or flow moves.
+- **Done when** is a short checklist a reviewer verifies without reading the code.
+- **Risks & notes** for blast radius, reversibility, links and decisions. Omit when empty.
+
+## Formatting
+
+- **One line per paragraph.** Never hard-wrap at a column. Leave one blank line between blocks. GitHub reflows the paragraph anyway; hard wraps only make the raw body noisy.
+- Keep each section to a few lines. The diff carries the detail.
+- When the repo documents its own ticket template, that wins over this one.
 
 ## Rules
 

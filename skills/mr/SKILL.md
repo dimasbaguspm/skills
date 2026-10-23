@@ -24,24 +24,31 @@ Example: `[ai:y][#142] feat: add refresh-token rotation`
 ## Body
 
 ```markdown
-## What problem that I am facing?
+## What problem does this solve?
 
-## How I implement it?
+## What is the user facing?
 
-## Why should I?
+## How did I solve it?
 
 ## Risks
+
+## Notes
 
 Closes #<n>
 ```
 
-- **What problem that I am facing?** The problem, from the user's point of view. Not the solution.
-- **How I implement it?** The approach and the parts touched. A tree or diff sketch beats prose when structure moved.
-- **Why should I?** Why this is worth merging. Link the issue.
+- **What problem does this solve?** The problem from the user's point of view, not the solution.
+- **What is the user facing?** The observable behavior this changes: which surfaces move and what the user sees.
+- **How did I solve it?** The approach and the parts touched. A file tree, diff sketch or sequence diagram beats prose when structure or flow moved.
 - **Risks.** Blast radius and reversibility: a one-way door (hard to undo) or a two-way door (cheap to roll back). Say plainly when there is none.
-- **Closes.** Add a closing keyword (`Closes #<n>`) as the last line, so the merge closes the issue. Omit for `[no-ticket]`.
+- **Notes.** Links, decisions and follow-ups a reviewer needs. Omit when empty.
+- **Closes.** The closing keyword (`Closes #<n>`) is the last line, so the merge closes the issue. Omit for `[no-ticket]`.
 
-Keep each section to a few lines. Do not restate the diff.
+## Formatting
+
+- **One line per paragraph.** Never hard-wrap at a column. Leave one blank line between blocks. GitHub reflows the paragraph anyway; hard wraps only make the raw body noisy.
+- Keep each section to a few lines. Do not restate the diff.
+- When the repo documents its own MR template, that wins over this one.
 
 ## Process
 
